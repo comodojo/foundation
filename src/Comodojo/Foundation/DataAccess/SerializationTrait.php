@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\DataAccess;
+<?php
+
+namespace Comodojo\Foundation\DataAccess;
 
 /**
  * @package     Comodojo Foundation
@@ -17,17 +19,17 @@
  */
 
 
-trait SerializationTrait {
+trait SerializationTrait
+{
 
     /**
      * Return the serialized data
      *
      * @return string $serialized
      */
-    public function serialize() {
-
+    public function serialize()
+    {
         return serialize($this->data);
-
     }
 
     /**
@@ -37,12 +39,9 @@ trait SerializationTrait {
      *
      * @return Routes $this
      */
-    public function unserialize($data) {
-
+    public function unserialize($data)
+    {
         $this->data = unserialize($data);
-
         return true;
-
     }
-
 }

@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Events;
+<?php
+
+namespace Comodojo\Foundation\Events;
 
 use \Comodojo\Foundation\Timing\TimingTrait;
 use \League\Event\AbstractEvent as LeagueAbstractEvent;
@@ -19,24 +21,20 @@ use \League\Event\AbstractEvent as LeagueAbstractEvent;
  * THE SOFTWARE.
  */
 
-abstract class AbstractEvent extends LeagueAbstractEvent {
-
+abstract class AbstractEvent extends LeagueAbstractEvent
+{
     use TimingTrait;
 
-    private $name;
+    private string $name;
 
-    public function __construct($name) {
-
+    public function __construct(string $name)
+    {
         $this->setTiming();
-
         $this->name = $name;
-
     }
 
-    public function getName() {
-
+    public function getName()
+    {
         return $this->name;
-
     }
-
 }

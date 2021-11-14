@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Timing;
+<?php
+
+namespace Comodojo\Foundation\Timing;
 
 use \Comodojo\Foundation\Validation\DataValidation;
 use \DateTime;
@@ -20,41 +22,36 @@ use \InvalidArgumentException;
  * THE SOFTWARE.
  */
 
-trait TimeTrait {
+trait TimeTrait
+{
 
-    protected $time;
+    protected ?DateTime $time = null;
 
-    public function setTime($reference = 'now') {
-
+    public function setTime($reference = 'now')
+    {
         $this->time = new DateTime($reference);
-
         return $this;
-
     }
 
-    public function getTime() {
-
+    public function getTime(): ?DateTime
+    {
         return $this->time;
-
     }
 
-    public function getTimestamp() {
-
+    public function getTimestamp(): int
+    {
         return (int) $this->time->format('U');
-
     }
 
-    public function setTimestamp($timestamp = null) {
-
-        if ( empty($timestamp) ) {
+    public function setTimestamp($timestamp = null)
+    {
+        if (empty($timestamp)) {
             return $this->setTime();
-        } else if ( DataValidation::validateTimestamp($timestamp) === false ) {
+        } else if (DataValidation::validateTimestamp($timestamp) === false) {
             throw new InvalidArgumentException("Invalid timestamp provided");
         } else {
             $this->time = DateTime::createFromFormat('U', $timestamp);
             return $this;
         }
-
     }
-
 }

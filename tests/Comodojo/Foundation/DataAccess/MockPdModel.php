@@ -20,9 +20,9 @@ use \Comodojo\Foundation\DataAccess\Model;
 
 class MockPdModel extends Model {
 
-    protected $mode = self::PROTECTDATA;
+    protected int $mode = self::PROTECTDATA;
 
-    protected $data = [
+    protected array $data = [
         "question" => "Ultimate Question of Life, The Universe, and Everything",
         "answer" => 42
     ];

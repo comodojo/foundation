@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\DataAccess;
+<?php
+
+namespace Comodojo\Foundation\DataAccess;
 
 use \OutOfBoundsException;
 
@@ -18,7 +20,8 @@ use \OutOfBoundsException;
  * THE SOFTWARE.
  */
 
-trait SeekableIteratorTrait {
+trait SeekableIteratorTrait
+{
 
     /**
      * Seek $data to $position
@@ -27,14 +30,11 @@ trait SeekableIteratorTrait {
      *
      * @return mixed
      */
-     public function seek($position) {
-
-         if ( array_key_exists($position, $this->data) ) {
-             throw new OutOfBoundsException("invalid seek position ($position)");
-         }
-
-         $this->position = $position;
-
-     }
-
+    public function seek($position)
+    {
+        if (array_key_exists($position, $this->data)) {
+            throw new OutOfBoundsException("invalid seek position ($position)");
+        }
+        $this->position = $position;
+    }
 }

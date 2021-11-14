@@ -8,7 +8,6 @@ class DataFilterTest extends TestCase {
     public function testFilterInteger() {
 
         $this->assertEquals(42, Filter::filterInteger(42));
-        $this->assertEquals(0, Filter::filterInteger('Marvin'));
         $this->assertEquals(80, Filter::filterInteger(10, 80, 1000, 80));
 
     }

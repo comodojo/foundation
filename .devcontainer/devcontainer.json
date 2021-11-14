@@ -18,7 +18,7 @@
 		"felixfbecker.php-intellisense",
 		"mrmlnc.vscode-apache",
 		"eamodio.gitlens",
-		"kokororin.vscode-phpfmt"
+		"bmewburn.vscode-intelephense-client"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [8080],

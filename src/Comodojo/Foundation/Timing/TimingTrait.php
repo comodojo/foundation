@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Timing;
+<?php
+
+namespace Comodojo\Foundation\Timing;
 
 use \DateTime;
 use \DateTimeZone;
@@ -20,36 +22,32 @@ use \InvalidArgumentException;
  * THE SOFTWARE.
  */
 
-trait TimingTrait {
+trait TimingTrait
+{
 
-    protected $timing;
+    protected ?float $timing = null;
 
-    public function setTiming($time = null) {
-
-        if ( empty($time) ) {
+    public function setTiming(?float $time = null)
+    {
+        if (empty($time)) {
             $this->timing = microtime(true);
             return $this;
-        } else if ( is_float($time) === false ) {
+        } else if (is_float($time) === false) {
             throw new InvalidArgumentException("Timing reference should be a float");
         } else {
             $this->timing = $time;
             return $this;
         }
-
     }
 
-    public function getTiming() {
-
+    public function getTiming(): ?float
+    {
         return $this->timing;
-
     }
 
-    public function getTime() {
-
+    public function getTime(): DateTime
+    {
         $timezone = new DateTimeZone(date_default_timezone_get());
-
         return DateTime::createFromFormat('U.u', $this->timing)->setTimezone($timezone);
-
     }
-
 }

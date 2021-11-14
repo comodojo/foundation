@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Base;
+<?php
+
+namespace Comodojo\Foundation\Base;
 
 /**
  * @package     Comodojo Foundation
@@ -15,23 +17,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-trait ConfigurationTrait {
+
+trait ConfigurationTrait
+{
 
     /**
      * @var Configuration
      */
-    protected $configuration;
+    protected ?Configuration $configuration = null;
 
     /**
      * Get current configuration
      *
      * @return Configuration
      */
-    public function getConfiguration() {
-
+    public function getConfiguration(): ?Configuration
+    {
         return $this->configuration;
-
     }
 
     /**
@@ -40,12 +42,9 @@ trait ConfigurationTrait {
      * @param Configuration $configuration
      * @return self
      */
-    public function setConfiguration(Configuration $configuration) {
-
+    public function setConfiguration(Configuration $configuration)
+    {
         $this->configuration = $configuration;
-
         return $this;
-
     }
-
 }

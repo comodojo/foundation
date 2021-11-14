@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Console;
+<?php
+
+namespace Comodojo\Foundation\Console;
 
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 
@@ -18,24 +20,20 @@ use Symfony\Component\Console\Event\ConsoleTerminateEvent;
  * THE SOFTWARE.
  */
 
-class StopEventListener {
+class StopEventListener
+{
 
-    static public function listen(ConsoleTerminateEvent $event) {
-
+    static public function listen(ConsoleTerminateEvent $event)
+    {
         $command = $event->getCommand();
         $name = $command->getName();
         $output = $event->getOutput();
         $output->writeln("");
 
-        if ( $command instanceof AbstractCommand ) {
-
+        if ($command instanceof AbstractCommand) {
             $logger = $command->getLogger();
             $time = number_format($command->getEndTime(), 2);
-
             $logger->notice("Command $name tooks $time secs");
-
         }
-
     }
-
 }

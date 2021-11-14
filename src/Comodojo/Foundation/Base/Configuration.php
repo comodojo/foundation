@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Base;
+<?php
+
+namespace Comodojo\Foundation\Base;
 
 /**
  * @package     Comodojo Foundation
@@ -16,7 +18,8 @@
  * THE SOFTWARE.
  */
 
-class Configuration {
+class Configuration
+{
 
     use ConfigurationParametersTrait;
 
@@ -26,10 +29,9 @@ class Configuration {
      * @param array $configuration
      * @return self
      */
-    public function __construct(array $configuration = []) {
-
+    public function __construct(array $configuration = [])
+    {
         $this->parameters = array_merge($this->parameters, $configuration);
-
     }
 
     /**
@@ -41,10 +43,9 @@ class Configuration {
      * @param string $property
      * @return bool
      */
-    public function isDefined($property) {
-
+    public function isDefined($property)
+    {
         return $this->has($property);
-
     }
 
     /**
@@ -53,18 +54,14 @@ class Configuration {
      * @param array $properties
      * @return self
      */
-    public function merge(array $properties) {
-
+    public function merge(array $properties)
+    {
         $this->parameters = array_replace($this->parameters, $properties);
-
         return $this;
-
     }
 
-    public static function create(array $configuration = []) {
-
+    public static function create(array $configuration = [])
+    {
         return new Configuration($configuration);
-
     }
-
 }

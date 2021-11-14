@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\DataAccess;
+<?php
+
+namespace Comodojo\Foundation\DataAccess;
 
 /**
  * @package     Comodojo Foundation
@@ -16,52 +18,48 @@
  * THE SOFTWARE.
  */
 
-trait ArrayAccessTrait {
+trait ArrayAccessTrait
+{
 
     /**
      * Return the value at index
      *
      * @return string $index The offset
      */
-     public function offsetGet($index) {
+    public function offsetGet($index)
+    {
+        return $this->data[$index];
+    }
 
-         return $this->data[$index];
-
-     }
-
-     /**
+    /**
      * Assigns a value to index offset
      *
      * @param string $index The offset to assign the value to
      * @param mixed  $value The value to set
      */
-     public function offsetSet($index, $value) {
+    public function offsetSet($index, $value)
+    {
+        $this->data[$index] = $value;
+    }
 
-         $this->data[$index] = $value;
-
-     }
-
-     /**
+    /**
      * Unsets an index
      *
      * @param string $index The offset to unset
      */
-     public function offsetUnset($index) {
+    public function offsetUnset($index)
+    {
+        unset($this->data[$index]);
+    }
 
-         unset($this->data[$index]);
-
-     }
-
-     /**
+    /**
      * Check if an index exists
      *
      * @param string $index Offset
      * @return boolean
      */
-     public function offsetExists($index) {
-
-         return $this->offsetGet($index) !== null;
-
-     }
-
+    public function offsetExists($index)
+    {
+        return $this->offsetGet($index) !== null;
+    }
 }

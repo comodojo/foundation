@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Validation;
+<?php
+
+namespace Comodojo\Foundation\Validation;
 
 use \DateTime;
 use \UnexpectedValueException;
@@ -19,7 +21,8 @@ use \UnexpectedValueException;
  * THE SOFTWARE.
  */
 
-class DataValidation {
+class DataValidation
+{
 
     const STRING = 'STRING';
     const BOOL = 'BOOL';
@@ -38,7 +41,7 @@ class DataValidation {
     const NULLVALUE = 'NULL';
     const TIMESTAMP = 'TIMESTAMP';
 
-    private static $supported_types = array (
+    private static $supported_types = [
         "STRING" => 'self::validateString',
         "BOOL" => 'self::validateBoolean',
         "BOOLEAN" => 'self::validateBoolean',
@@ -55,7 +58,7 @@ class DataValidation {
         "BASE64" => 'self::validateBase64',
         "NULL" => 'self::validateNull',
         "TIMESTAMP" => 'self::validateTimestamp'
-    );
+    ];
 
     /**
      * Generic validator.
@@ -66,16 +69,13 @@ class DataValidation {
      * @return bool
      * @throws UnexpectedValueException
      */
-    public static function validate($data, $type, callable $filter=null) {
-
+    public static function validate($data, $type, callable $filter = null): bool
+    {
         $type = strtoupper($type);
-
-        if ( !array_key_exists($type, self::$supported_types) ) {
+        if (!array_key_exists($type, self::$supported_types)) {
             throw new UnexpectedValueException("Bad validation type");
         }
-
         return call_user_func(self::$supported_types[$type], $data, $filter);
-
     }
 
     /**
@@ -85,8 +85,11 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateString($data, callable $filter=null) {
-        if ( is_string($data) === false ) return false;
+    public static function validateString($data, callable $filter = null): bool
+    {
+        if (is_string($data) === false) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -97,8 +100,11 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateBoolean($data, callable $filter=null) {
-        if ( is_bool($data) === false ) return false;
+    public static function validateBoolean($data, callable $filter = null): bool
+    {
+        if (is_bool($data) === false) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -109,8 +115,11 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateInteger($data, callable $filter=null) {
-        if ( is_int($data) === false ) return false;
+    public static function validateInteger($data, callable $filter = null): bool
+    {
+        if (is_int($data) === false) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -121,8 +130,11 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateNumeric($data, callable $filter=null) {
-        if ( is_numeric($data) === false ) return false;
+    public static function validateNumeric($data, callable $filter = null): bool
+    {
+        if (is_numeric($data) === false) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -133,8 +145,11 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateFloat($data, callable $filter=null) {
-        if ( is_float($data) === false ) return false;
+    public static function validateFloat($data, callable $filter = null): bool
+    {
+        if (is_float($data) === false) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -145,9 +160,12 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateJson($data, callable $filter=null) {
+    public static function validateJson($data, callable $filter = null): bool
+    {
         $decoded = json_decode($data);
-        if ( is_null($decoded) ) return false;
+        if (is_null($decoded)) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -158,9 +176,12 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateSerialized($data, callable $filter=null) {
+    public static function validateSerialized($data, callable $filter = null): bool
+    {
         $decoded = @unserialize($data);
-        if ( $decoded === false && $data != @serialize(false) ) return false;
+        if ($decoded === false && $data != @serialize(false)) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -171,9 +192,14 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateArray($data, callable $filter=null) {
-        if ( is_array($data) === false ) return false;
-        if ( self::validateStruct($data) === true && array() !== $data  ) return false;
+    public static function validateArray($data, callable $filter = null): bool
+    {
+        if (is_array($data) === false) {
+            return false;
+        }
+        if (self::validateStruct($data) === true && array() !== $data) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -184,8 +210,11 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateStruct($data, callable $filter=null) {
-        if ( is_array($data) === false && is_object($data) === false ) return false;
+    public static function validateStruct($data, callable $filter = null): bool
+    {
+        if (is_array($data) === false && is_object($data) === false) {
+            return false;
+        }
         $array = (array) $data;
         $valid = array_keys($array) !== range(0, count($array) - 1);
         return $valid === false ? false : self::applyFilter($data, $filter);
@@ -198,8 +227,11 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateDatetimeIso8601($data, callable $filter=null) {
-        if ( DateTime::createFromFormat(DateTime::ATOM, $data) === false ) return false;
+    public static function validateDatetimeIso8601($data, callable $filter = null): bool
+    {
+        if (DateTime::createFromFormat(DateTime::ATOM, $data) === false) {
+            return false;
+        }
         return self::applyFilter($data, $filter);
     }
 
@@ -210,7 +242,8 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateBase64($data, callable $filter=null) {
+    public static function validateBase64($data, callable $filter = null): bool
+    {
         return base64_encode(base64_decode($data, true)) === $data ?
             self::applyFilter($data, $filter)
             : false;
@@ -223,7 +256,8 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateNull($data, callable $filter=null) {
+    public static function validateNull($data, callable $filter = null): bool
+    {
         return is_null($data);
     }
 
@@ -234,14 +268,11 @@ class DataValidation {
      * @param callable $filter Custom filter
      * @return bool
      */
-    public static function validateTimestamp($data, callable $filter=null) {
-
-        return (
-            (string) (int) $data === (string) $data
+    public static function validateTimestamp($data, callable $filter = null): bool
+    {
+        return ((string) (int) $data === (string) $data
             && ($data <= PHP_INT_MAX)
-            && ($data >= ~PHP_INT_MAX)
-        ) ? self::applyFilter($data, $filter) : false;
-
+            && ($data >= ~PHP_INT_MAX)) ? self::applyFilter($data, $filter) : false;
     }
 
     /**
@@ -249,8 +280,8 @@ class DataValidation {
      * @param callable $filter
      * @return bool
      */
-    private static function applyFilter($data, callable $filter=null) {
+    private static function applyFilter($data, callable $filter = null): bool
+    {
         return $filter === null ? true : (bool) call_user_func($filter, $data);
     }
-
 }

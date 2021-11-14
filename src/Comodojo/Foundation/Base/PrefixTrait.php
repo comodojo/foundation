@@ -1,6 +1,6 @@
 <?php
 
-namespace Comodojo\Foundation\DataAccess;
+namespace Comodojo\Foundation\Base;
 
 /**
  * @package     Comodojo Foundation
@@ -18,16 +18,33 @@ namespace Comodojo\Foundation\DataAccess;
  * THE SOFTWARE.
  */
 
-trait CountableTrait
+trait PrefixTrait
 {
 
     /**
-     * Return the amount of routes loaded
-     *
-     * @return int $count
+     * @var string
      */
-    public function count()
+    protected string $prefix = '';
+
+    /**
+     * Get current prefix
+     *
+     * @return sring
+     */
+    public function getPrefix(): string
     {
-        return count($this->data);
+        return $this->prefix;
+    }
+
+    /**
+     * Set current prefix
+     *
+     * @param string $prefix
+     * @return self
+     */
+    public function setPrefix(String $prefix)
+    {
+        $this->prefix = $prefix;
+        return $this;
     }
 }

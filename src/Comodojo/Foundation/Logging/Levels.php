@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Logging;
+<?php
+
+namespace Comodojo\Foundation\Logging;
 
 use \Monolog\Logger;
 
@@ -19,9 +21,10 @@ use \Monolog\Logger;
  */
 
 
-class Levels {
+class Levels
+{
 
-    const DEFAULT_LOG_LEVEL = 'ERROR';
+    protected const DEFAULT_LOG_LEVEL = 'ERROR';
 
     protected static $levels = array(
         'INFO' => Logger::INFO,
@@ -41,14 +44,12 @@ class Levels {
      *
      * @return  integer
      */
-    public static function getLevel($level = null) {
-
+    public static function getLevel($level = null)
+    {
         $level = strtoupper($level);
-
-        if ( array_key_exists($level, self::$levels) ) return self::$levels[$level];
-
+        if (array_key_exists($level, self::$levels)) {
+            return self::$levels[$level];
+        }
         return self::$levels[self::DEFAULT_LOG_LEVEL];
-
     }
-
 }

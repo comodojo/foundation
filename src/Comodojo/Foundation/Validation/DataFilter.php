@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Validation;
+<?php
+
+namespace Comodojo\Foundation\Validation;
 
 /**
  * @package     Comodojo Foundation
@@ -16,7 +18,8 @@
  * THE SOFTWARE.
  */
 
-class DataFilter {
+class DataFilter
+{
 
     /**
      * Filter an integer.
@@ -29,29 +32,31 @@ class DataFilter {
      * @param int $default Default value
      * @return int
      */
-    public static function filterInteger($int, $min=~PHP_INT_MAX, $max=PHP_INT_MAX, $default=0) {
-
-        return filter_var($int, FILTER_VALIDATE_INT, array(
-            'options' => array(
+    public static function filterInteger(
+        int $int,
+        int $min = ~PHP_INT_MAX,
+        int $max = PHP_INT_MAX,
+        int $default = 0)
+    {
+        return filter_var($int, FILTER_VALIDATE_INT, [
+            'options' => [
                 'default' => $default,
                 'min_range' => $min,
                 'max_range' => $max
-            )
-        ));
-
+            ]
+        ]);
     }
 
     /**
      * Filter a TCP/UDP port
      *
      * @param int $port
-     * @param array $default
+     * @param int $default
      * @return int
      */
-    public static function filterPort($port, $default = 80) {
-
+    public static function filterPort(int $port, int $default = 80)
+    {
         return self::filterInteger($port, 1, 65535, $default);
-
     }
 
     /**
@@ -60,17 +65,15 @@ class DataFilter {
      * This method is a shortcut to filter_var using FILTER_VALIDATE_BOOLEAN
      *
      * @param bool $bool
-     * @param array $default
+     * @param bool $default
      * @return bool
      */
-    public static function filterBoolean($bool, $default = false) {
-
-        return filter_var($bool, FILTER_VALIDATE_BOOLEAN, array(
-            'options' => array(
+    public static function filterBoolean($bool, bool $default = false)
+    {
+        return filter_var($bool, FILTER_VALIDATE_BOOLEAN, [
+            'options' => [
                 'default' => $default
-            )
-        ));
-
+            ]
+        ]);
     }
-
 }

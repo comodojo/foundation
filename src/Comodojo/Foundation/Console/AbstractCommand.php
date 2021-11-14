@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Console;
+<?php
+
+namespace Comodojo\Foundation\Console;
 
 use \Comodojo\Foundation\Base\Configuration;
 use \Comodojo\Foundation\Base\ConfigurationTrait;
@@ -22,32 +24,31 @@ use \DateTime;
  * THE SOFTWARE.
  */
 
-abstract class AbstractCommand extends Command {
+abstract class AbstractCommand extends Command
+{
 
     use ConfigurationTrait;
     use LoggerTrait;
 
     /**
-     * @var DateTime
+     * @var float
      */
-    protected $start_time;
+    protected float $start_time;
 
-    public function setStartTime() {
+    public function setStartTime()
+    {
         $this->start_time = microtime(true);
     }
 
-    public function getEndTime() {
-        $time = microtime(true);
-        return $time - $this->start_time;
+    public function getEndTime()
+    {
+        return microtime(true) - $this->start_time;
     }
 
-    static public function init(Configuration $configuration) {
-
+    static public function init(Configuration $configuration)
+    {
         $me = get_called_class();
         $myself = new $me();
-
         return $myself->setConfiguration($configuration);
-
     }
-
 }

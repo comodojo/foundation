@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Logging;
+<?php
+
+namespace Comodojo\Foundation\Logging;
 
 use \Psr\Log\LoggerInterface;
 
@@ -18,22 +20,22 @@ use \Psr\Log\LoggerInterface;
  * THE SOFTWARE.
  */
 
-trait LoggerTrait {
+trait LoggerTrait
+{
 
     /**
      * @var LoggerInterface
      */
-    protected $logger;
+    protected ?LoggerInterface $logger = null;
 
     /**
      * Get current logger
      *
      * @return LoggerInterface
      */
-    public function getLogger() {
-
+    public function getLogger(): ?LoggerInterface
+    {
         return $this->logger;
-
     }
 
     /**
@@ -42,12 +44,9 @@ trait LoggerTrait {
      * @param LoggerInterface $logger
      * @return self
      */
-    public function setLogger(LoggerInterface $logger) {
-
+    public function setLogger(LoggerInterface $logger)
+    {
         $this->logger = $logger;
-
         return $this;
-
     }
-
 }

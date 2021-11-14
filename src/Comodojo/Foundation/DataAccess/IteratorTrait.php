@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\DataAccess;
+<?php
+
+namespace Comodojo\Foundation\DataAccess;
 
 /**
  * @package     Comodojo Foundation
@@ -16,15 +18,15 @@
  * THE SOFTWARE.
  */
 
-trait IteratorTrait {
+trait IteratorTrait
+{
 
     /**
      * Reset the iterator
      */
-    public function rewind() {
-
+    public function rewind()
+    {
         reset($this->data);
-
     }
 
     /**
@@ -32,10 +34,9 @@ trait IteratorTrait {
      *
      * @return mixed
      */
-    public function current() {
-
+    public function current()
+    {
         return current($this->data);
-
     }
 
     /**
@@ -43,19 +44,17 @@ trait IteratorTrait {
      *
      * @return string|int
      */
-    public function key() {
-
+    public function key()
+    {
         return key($this->data);
-
     }
 
     /**
      * Move to next element
      */
-    public function next() {
-
+    public function next()
+    {
         return next($this->data);
-
     }
 
     /**
@@ -63,10 +62,8 @@ trait IteratorTrait {
      *
      * @return boolean
      */
-    public function valid() {
-
+    public function valid()
+    {
         return isset($this->data[$this->key()]);
-
     }
-
 }

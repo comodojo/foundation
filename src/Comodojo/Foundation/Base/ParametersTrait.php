@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Base;
+<?php
+
+namespace Comodojo\Foundation\Base;
 
 /**
  * @package     Comodojo Foundation
@@ -16,7 +18,8 @@
  * THE SOFTWARE.
  */
 
-trait ParametersTrait {
+trait ParametersTrait
+{
 
     /**
      * @var array
@@ -29,9 +32,11 @@ trait ParametersTrait {
      * @param string $parameter
      * @return mixed|null
      */
-    public function get($parameter=null) {
-
-        if ( is_null($parameter) ) return $this->parameters;
+    public function get($parameter = null)
+    {
+        if (is_null($parameter)) {
+            return $this->parameters;
+        }
 
         return array_key_exists($parameter, $this->parameters) ?
             $this->parameters[$parameter] : null;
@@ -57,7 +62,6 @@ trait ParametersTrait {
         //     $value = preg_replace(array_keys($substitutions), array_values($substitutions), $value);
         //
         // }
-
     }
 
     /**
@@ -66,12 +70,10 @@ trait ParametersTrait {
      * @param string $parameter
      * @return self
      */
-    public function set($parameter, $value) {
-
+    public function set($parameter, $value)
+    {
         $this->parameters[$parameter] = $value;
-
         return $this;
-
     }
 
     /**
@@ -80,10 +82,9 @@ trait ParametersTrait {
      * @param string $parameter
      * @return bool
      */
-    public function has($parameter) {
-
+    public function has($parameter)
+    {
         return isset($this->parameters[$parameter]);
-
     }
 
     /**
@@ -92,26 +93,16 @@ trait ParametersTrait {
      * @param string $parameter
      * @return bool
      */
-    public function delete($parameter = null) {
-
-        if ( is_null($parameter) ) {
-
+    public function delete($parameter = null)
+    {
+        if (is_null($parameter)) {
             $this->parameters = [];
-
             return true;
-
-        } else if ( array_key_exists($parameter, $this->parameters) ) {
-
+        } else if (array_key_exists($parameter, $this->parameters)) {
             unset($this->parameters[$parameter]);
-
             return true;
-
         } else {
-
             return false;
-
         }
-
     }
-
 }

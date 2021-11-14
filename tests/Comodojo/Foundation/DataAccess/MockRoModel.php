@@ -20,9 +20,9 @@ use \Comodojo\Foundation\DataAccess\Model;
 
 class MockRoModel extends Model {
 
-    protected $mode = self::READONLY;
+    protected int $mode = self::READONLY;
 
-    protected $data = [
+    protected array $data = [
         "question" => "Ultimate Question of Life, The Universe, and Everything",
         "answer" => 42
     ];

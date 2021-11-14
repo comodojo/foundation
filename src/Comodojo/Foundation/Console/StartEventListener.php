@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Console;
+<?php
+
+namespace Comodojo\Foundation\Console;
 
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Logger\ConsoleLogger;
@@ -19,30 +21,25 @@ use Symfony\Component\Console\Logger\ConsoleLogger;
  * THE SOFTWARE.
  */
 
-class StartEventListener {
+class StartEventListener
+{
 
-    static public function listen(ConsoleCommandEvent $event) {
-
+    static public function listen(ConsoleCommandEvent $event)
+    {
         $output = $event->getOutput();
         $command = $event->getCommand();
         $application = $command->getApplication();
 
-        if ( $command instanceof AbstractCommand ) {
-
+        if ($command instanceof AbstractCommand) {
             $logger = new ConsoleLogger($output);
             $command->setLogger($logger);
-
             $command->setStartTime();
-
             $output->writeln([
                 '',
                 $application->getVersion(),
                 '-----------------------------',
                 ''
             ]);
-
         }
-
     }
-
 }

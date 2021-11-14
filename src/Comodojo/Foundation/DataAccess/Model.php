@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\DataAccess;
+<?php
+
+namespace Comodojo\Foundation\DataAccess;
 
 use \UnexpectedValueException;
 use \BadMethodCallException;
@@ -20,92 +22,84 @@ use \BadMethodCallException;
  */
 
 
-abstract class Model {
+abstract class Model
+{
 
-    const READWRITE = 1;
+    public const READWRITE = 1;
 
-    const PROTECTDATA = 2;
+    public const PROTECTDATA = 2;
 
-    const READONLY = 3;
+    public const READONLY = 3;
 
-    protected $mode;
+    protected int $mode;
 
-    protected $data = [];
+    protected array $data = [];
 
-    public function __get($name) {
+    public function __get($name)
+    {
+        return array_key_exists($name, $this->data) ? $this->data[$name] : null;
+    }
 
-        if ( array_key_exists($name, $this->data) ) {
-
-            return $this->data[$name];
-
+    public function __set($name, $value)
+    {
+        if ($this->mode === self::READONLY) {
+            throw new BadMethodCallException("Cannot set item $name in readonly data mode");
         }
-
-        return null;
-
-    }
-
-    public function __set($name, $value) {
-
-        if ( $this->mode === self::READONLY ) throw new BadMethodCallException("Cannot set item $name in readonly data mode");
-
-        if ( $this->mode === self::PROTECTDATA && !array_key_exists($name, $this->data) ) throw new UnexpectedValueException("Cannot add item $name in protected data mode");
-
+        if ($this->mode === self::PROTECTDATA && !array_key_exists($name, $this->data)) {
+            throw new UnexpectedValueException("Cannot add item $name in protected data mode");
+        }
         $this->data[$name] = $value;
-
     }
 
-    public function __unset($name) {
-
-        if ( $this->mode === self::READONLY ) throw new BadMethodCallException("Cannot unset item $name in readonly data mode");
-
-        if ( $this->mode === self::PROTECTDATA ) throw new BadMethodCallException("Cannot unset item $name in protected data mode");
-
-        if ( isset($this->$name) ) unset($this->data[$name]);
-
+    public function __unset($name)
+    {
+        if ($this->mode === self::READONLY) {
+            throw new BadMethodCallException("Cannot unset item $name in readonly data mode");
+        }
+        if ($this->mode === self::PROTECTDATA) {
+            throw new BadMethodCallException("Cannot unset item $name in protected data mode");
+        }
+        if (isset($this->$name)) {
+            unset($this->data[$name]);
+        }
     }
 
-    public function __isset($name) {
-
+    public function __isset($name)
+    {
         return array_key_exists($name, $this->data);
-
     }
 
-    public function merge($data) {
-
+    public function merge($data)
+    {
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
-
         return $this;
-
     }
 
-    public function export() {
-
+    public function export()
+    {
         return $this->data;
-
     }
 
-    public function import($data) {
-
-        if ( $this->mode === self::READONLY ) throw new BadMethodCallException("Cannot import items in readonly data mode");
-
+    public function import($data)
+    {
+        if ($this->mode === self::READONLY) {
+            throw new BadMethodCallException("Cannot import items in readonly data mode");
+        }
         $diff = array_diff_key($this->data, $data);
 
-        if ( $this->mode === self::PROTECTDATA && !empty($diff) ) throw new UnexpectedValueException("Cannot import new items [".implode(", ", $diff)."] in protected data mode");
-
+        if ($this->mode === self::PROTECTDATA && !empty($diff)) {
+            throw new UnexpectedValueException("Cannot import new items [" . implode(", ", $diff) . "] in protected data mode");
+        }
         $this->data = $data;
 
         return $this;
-
     }
 
-    protected function setRaw($name, $value) {
-
+    protected function setRaw($name, $value)
+    {
         $this->data[$name] = $value;
-
         return $this;
-
     }
-
 }

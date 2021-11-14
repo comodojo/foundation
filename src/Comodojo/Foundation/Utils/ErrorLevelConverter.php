@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Utils;
+<?php
+
+namespace Comodojo\Foundation\Utils;
 
 /**
  * @package     Comodojo Foundation
@@ -16,7 +18,8 @@
  * THE SOFTWARE.
  */
 
-class ErrorLevelConverter {
+class ErrorLevelConverter
+{
 
     protected static $levels = [
         1 => "E_ERROR",
@@ -43,10 +46,8 @@ class ErrorLevelConverter {
      * @param int $error_code
      * @return string
      */
-    public static function convert(int $error_code) {
-
+    public static function convert(int $error_code): string
+    {
         return isset(self::$levels[$error_code]) ? self::$levels[$error_code] : "GENERIC_ERROR";
-
     }
-
 }

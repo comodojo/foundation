@@ -1,8 +1,12 @@
-<?php namespace Comodojo\Foundation\Utils;
+<?php
 
-use \Comodojo\Foundation\DataAccess\Model;
-use \Comodojo\Foundation\DataAccess\IteratorTrait;
-use \Comodojo\Foundation\DataAccess\CountableTrait;
+namespace Comodojo\Foundation\Utils;
+
+use \Comodojo\Foundation\DataAccess\{
+    Model,
+    IteratorTrait,
+    CountableTrait
+};
 use \Iterator;
 use \Countable;
 
@@ -22,25 +26,21 @@ use \Countable;
  * THE SOFTWARE.
  */
 
-class ClassProperties extends Model implements Iterator, Countable {
-
+class ClassProperties extends Model implements Iterator, Countable
+{
     use IteratorTrait;
     use CountableTrait;
 
-    protected $mode = self::PROTECTDATA;
+    protected int $mode = self::PROTECTDATA;
 
-    public function __construct($properties = []) {
-
+    public function __construct($properties = [])
+    {
         $this->data = $properties;
-
     }
 
-    public static function create($properties = []) {
-
+    public static function create($properties = [])
+    {
         $classProperties = new ClassProperties($properties);
-
         return $classProperties;
-
     }
-
 }

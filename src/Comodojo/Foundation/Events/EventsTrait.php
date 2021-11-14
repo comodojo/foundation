@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Events;
+<?php
+
+namespace Comodojo\Foundation\Events;
 
 use \Comodojo\Foundation\Events\Manager as EventsManager;
 
@@ -24,22 +26,22 @@ use \Comodojo\Foundation\Events\Manager as EventsManager;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-trait EventsTrait {
+trait EventsTrait
+{
 
     /**
      * @var EventsManager
      */
-    protected $events;
+    protected ?EventsManager $events = null;
 
     /**
      * Get current events' manager
      *
      * @return EventsManager
      */
-    public function getEvents() {
-
+    public function getEvents()
+    {
         return $this->events;
-
     }
 
     /**
@@ -48,12 +50,9 @@ trait EventsTrait {
      * @param EventsManager $events
      * @return self
      */
-    public function setEvents(EventsManager $events) {
-
+    public function setEvents(EventsManager $events)
+    {
         $this->events = $events;
-
         return $this;
-
     }
-
 }

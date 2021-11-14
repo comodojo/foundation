@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Base;
+<?php
+
+namespace Comodojo\Foundation\Base;
 
 use \Exception;
 
@@ -18,36 +20,22 @@ use \Exception;
  * THE SOFTWARE.
  */
 
-class ConfigurationLoader extends AbstractYamlLoader {
+class ConfigurationLoader extends AbstractYamlLoader
+{
 
-    public static function load($file, array $attributes = []) {
-
+    public static function load(string $file, ?array $attributes = []): Configuration
+    {
         $conf = new Configuration($attributes);
+        $conf->merge(static::importData($file));
+        $base = $conf->get('base-path');
+        $static = $conf->get('static-config');
+        $env = $conf->get('env-config');
 
-        try {
-
-            $conf->merge(static::importData($file));
-
-            $base = $conf->get('base-path');
-            $static = $conf->get('static-config');
-            $env = $conf->get('env-config');
-
-            if ( $env !== null ) {
-
-                $env_path = substr($env, 0, 1) === '/' ? $env : "$base/$static/$env";
-
-                $conf->merge(static::importData($env_path));
-
-            }
-
-        } catch (Exception $e) {
-
-            throw $e;
-
+        if ($env !== null) {
+            $env_path = substr($env, 0, 1) === '/' ? $env : "$base/$static/$env";
+            $conf->merge(static::importData($env_path));
         }
 
         return $conf;
-
     }
-
 }

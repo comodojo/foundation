@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Utils;
+<?php
+
+namespace Comodojo\Foundation\Utils;
 
 /**
  * @package     Comodojo Foundation
@@ -16,7 +18,8 @@
  * THE SOFTWARE.
  */
 
-class ArrayOps {
+class ArrayOps
+{
 
     /**
      * Perform a circular diff between two arrays using keys.
@@ -32,8 +35,8 @@ class ArrayOps {
      * @param array $right
      * @return array
      */
-    public static function circularDiffKeys(array $left, array $right) {
-
+    public static function circularDiffKeys(array $left, array $right): array
+    {
         return [
             // only in left
             array_diff_key($left, $right),
@@ -42,7 +45,6 @@ class ArrayOps {
             // only in right
             array_diff_key($right, $left)
         ];
-
     }
 
     /**
@@ -52,10 +54,9 @@ class ArrayOps {
      * @param array $array_to_filter
      * @return array
      */
-    public static function filterByKeys(array $array_of_keys, array $array_to_filter) {
-
+    public static function filterByKeys(array $array_of_keys, array $array_to_filter): array
+    {
         return array_intersect_key($array_to_filter, array_flip($array_of_keys));
-
     }
 
     /**
@@ -65,16 +66,12 @@ class ArrayOps {
      * @param array $replace
      * @return array
      */
-    public static function replaceStrict(array $source, array ...$replace) {
-
+    public static function replaceStrict(array $source, array ...$replace): array
+    {
         $replacements = [];
-
         foreach ($replace as $items) {
             $replacements[] = array_intersect_key($items, $source);
         }
-
         return array_merge($source, ...$replacements);
-
     }
-
 }

@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Utils;
+<?php
+
+namespace Comodojo\Foundation\Utils;
 
 use \InvalidArgumentException;
 
@@ -18,7 +20,8 @@ use \InvalidArgumentException;
  * THE SOFTWARE.
  */
 
-class UniqueId {
+class UniqueId
+{
 
     /**
      * Generate a custom uid starting from a prefix
@@ -29,15 +32,12 @@ class UniqueId {
      * @param int $length
      * @return string
      */
-    public static function generateCustom($prefix, $length=128) {
-
-        if ( $length <= (strlen($prefix)+1) ) {
+    public static function generateCustom(string $prefix, int $length = 128): string
+    {
+        if ($length <= (strlen($prefix) + 1)) {
             throw new InvalidArgumentException("Uid length cannot be smaller than prefix length +1");
-
         }
-
-        return "$prefix-".self::generate($length-(strlen($prefix)+1));
-
+        return "$prefix-" . self::generate($length - (strlen($prefix) + 1));
     }
 
     /**
@@ -46,26 +46,18 @@ class UniqueId {
      * @param int $length
      * @return string
      */
-    public static function generate($length=128) {
-
+    public static function generate(int $length = 128): string
+    {
         if ($length < 32) {
-
             return substr(self::getUid(), 0, $length);
-
         } else if ($length == 32) {
-
             return self::getUid();
-
-        }  else {
-
-            $numString = (int)($length/32) + 1;
+        } else {
+            $numString = (int)($length / 32) + 1;
             $randNum = "";
             for ($i = 0; $i < $numString; $i++) $randNum .= self::getUid();
-
             return substr($randNum, 0, $length);
-
         }
-
     }
 
     /**
@@ -74,10 +66,8 @@ class UniqueId {
      * @param int $length
      * @return string
      */
-    protected static function getUid() {
-
+    protected static function getUid(): string
+    {
         return md5(uniqid(rand(), true), 0);
-
     }
-
 }

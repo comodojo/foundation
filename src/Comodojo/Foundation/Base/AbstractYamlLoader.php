@@ -1,9 +1,9 @@
-<?php namespace Comodojo\Foundation\Base;
+<?php
+
+namespace Comodojo\Foundation\Base;
 
 use \Symfony\Component\Yaml\Yaml;
-use \Symfony\Component\Yaml\Exception\ParseException;
 use \Comodojo\Exception\ConfigurationException;
-use \Exception;
 
 /**
  * @package     Comodojo Foundation
@@ -21,26 +21,20 @@ use \Exception;
  * THE SOFTWARE.
  */
 
-abstract class AbstractYamlLoader {
+abstract class AbstractYamlLoader
+{
 
-    protected static function importData($file) {
-
-        if ( file_exists($file) && is_readable($file) ) {
-
+    protected static function importData(string $file)
+    {
+        if (file_exists($file) && is_readable($file)) {
             $data = @file_get_contents($file);
-
-            if ( $data !== false ) {
-
-               return Yaml::parse($data);
-
-           } else {
-               throw new ConfigurationException("Configuration file $file not readable");
-           }
-
+            if ($data !== false) {
+                return Yaml::parse($data);
+            } else {
+                throw new ConfigurationException("Configuration file $file not readable");
+            }
         } else {
             throw new ConfigurationException("Configuration file $file not found");
         }
-
     }
-
 }
