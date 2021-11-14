@@ -8,7 +8,7 @@ Foundation classes for the comodojo project.
 
 ## Requirements
 
-- php >=5.6.0
+- php >=7.4.0
 
 ## Installation
 
