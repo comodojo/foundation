@@ -5,3 +5,4 @@ vendor/
 build/
 tests/root/log/*
 !tests/root/log/.placeholder
+ocular.phar
