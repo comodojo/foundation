@@ -29,6 +29,6 @@ Contributions are welcome and will be fully credited. Please see [CONTRIBUTING](
 
 `` comodojo/foundation `` is released under the MIT License (MIT). Please see [License File](LICENSE) for more information.
 
-> Copyright (c) 2018 Marco Giovinazzi
+> Copyright (c) 2021 Marco Giovinazzi
 >
 > For more information, visit [comodojo.org](https://comodojo.org).
