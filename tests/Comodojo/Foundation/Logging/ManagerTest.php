@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Tests\Logging;
+<?php declare(strict_types=1);
+
+namespace Comodojo\Foundation\Tests\Logging;
 
 use \Comodojo\Foundation\Base\Configuration;
 use \Comodojo\Foundation\Logging\Manager;
@@ -44,7 +46,5 @@ class ManagerTest extends TestCase
         $content = file_get_contents($file);
 
         $this->assertStringEndsWith("test.DEBUG: this is a test [] []\n", $content);
-
     }
-
 }

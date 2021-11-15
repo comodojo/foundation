@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Tests\DataAccess;
+<?php declare(strict_types=1);
+
+namespace Comodojo\Foundation\Tests\DataAccess;
 
 use \Comodojo\Foundation\DataAccess\Model;
 
@@ -18,7 +20,8 @@ use \Comodojo\Foundation\DataAccess\Model;
  * THE SOFTWARE.
  */
 
-class MockRwModel extends Model {
+class MockRwModel extends Model
+{
 
     protected int $mode = self::READWRITE;
 
@@ -26,5 +29,4 @@ class MockRwModel extends Model {
         "question" => "Ultimate Question of Life, The Universe, and Everything",
         "answer" => 42
     ];
-
 }

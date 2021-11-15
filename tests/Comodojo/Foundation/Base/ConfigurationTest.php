@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Tests\Base;
+<?php declare(strict_types=1);
+
+namespace Comodojo\Foundation\Tests\Base;
 
 use \Comodojo\Foundation\Base\Configuration;
 use \PHPUnit\Framework\TestCase;
@@ -24,14 +26,12 @@ class ConfigurationTest extends TestCase
         ];
 
         $this->config = new Configuration($test_values);
-
     }
 
     protected function tearDown(): void
     {
 
         unset($this->config);
-
     }
 
     public function testGetSetDelete()
@@ -52,7 +52,6 @@ class ConfigurationTest extends TestCase
         $remove = $this->config->get("t");
 
         $this->assertNull($remove);
-
     }
 
     public function testGetAll()
@@ -64,7 +63,6 @@ class ConfigurationTest extends TestCase
 
         $this->assertEquals($config["c"], 42);
         $this->assertEquals($config["a"]["a"], 'lorem');
-
     }
 
     public function testHas()
@@ -75,7 +73,6 @@ class ConfigurationTest extends TestCase
         $this->assertTrue($this->config->isDefined('a'));
 
         $this->assertFalse($this->config->has('z'));
-
     }
 
     public function testWholeDelete()
@@ -84,7 +81,6 @@ class ConfigurationTest extends TestCase
         $this->assertTrue($result = $this->config->delete());
 
         $this->assertFalse($this->config->isDefined('a'));
-
     }
 
     public function testMerge()
@@ -96,7 +92,6 @@ class ConfigurationTest extends TestCase
 
         $this->assertFalse($this->config->get('a'));
         $this->assertTrue($this->config->get('b'));
-
     }
 
     public function testSelectiveCrud()
@@ -122,7 +117,6 @@ class ConfigurationTest extends TestCase
         $this->assertArrayNotHasKey('amet', $ac_value);
 
         $this->assertFalse($this->config->has("a.c.amet"));
-
     }
 
     public function testStaticConstructor()
@@ -133,7 +127,5 @@ class ConfigurationTest extends TestCase
         $this->assertInstanceOf('\\Comodojo\\Foundation\\Base\\Configuration', $config);
         $this->assertEquals("is", $config->get("this"));
         $this->assertIsArray($config->get("a"));
-
     }
-
 }

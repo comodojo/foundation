@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Tests\Base;
+<?php declare(strict_types=1);
+
+namespace Comodojo\Foundation\Tests\Base;
 
 use Comodojo\Foundation\Tests\Mock\Version;
 use \Comodojo\Foundation\Base\ConfigurationLoader;
@@ -12,9 +14,9 @@ class VersionTest extends TestCase
     protected $name = 'Heart of Gold';
     protected $description = 'The first spacecraft to make use of the Infinite Improbability Drive';
     protected $version = '42';
-    protected $ascii = "/r/n                       _    __         /r/n".
-                       "|_| _  _  ___|_    _ _|_   /__ _  |  _|/r/n".
-                       "| |(/_(_| |  |_   (_) |    \_|(_) | (_|/r/n";
+    protected $ascii = "/r/n                       _    __         /r/n" .
+        "|_| _  _  ___|_    _ _|_   /__ _  |  _|/r/n" .
+        "| |(/_(_| |  |_   (_) |    \_|(_) | (_|/r/n";
 
     protected $template = "{name} + {description} + {version}";
 
@@ -27,14 +29,12 @@ class VersionTest extends TestCase
         $this->config = ConfigurationLoader::load($config_file, [
             'base-path' => $basepath,
         ]);
-
     }
 
     protected function tearDown(): void
     {
 
         unset($this->config);
-
     }
 
     public function testVersion()
@@ -46,7 +46,6 @@ class VersionTest extends TestCase
         $this->assertEquals($this->description, $version->getDescription());
         $this->assertEquals($this->version, $version->getVersion());
         $this->assertEquals($this->ascii, $version->getAscii());
-
     }
 
     public function testVersionConfigurationOverride()
@@ -56,7 +55,5 @@ class VersionTest extends TestCase
 
         $this->assertEquals('42 is the new black', $version->getName());
         $this->assertEquals($this->description, $version->getDescription());
-
     }
-
 }

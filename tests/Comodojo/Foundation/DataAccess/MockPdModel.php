@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Tests\DataAccess;
+<?php declare(strict_types=1);
+
+namespace Comodojo\Foundation\Tests\DataAccess;
 
 use \Comodojo\Foundation\DataAccess\Model;
 
@@ -18,7 +20,8 @@ use \Comodojo\Foundation\DataAccess\Model;
  * THE SOFTWARE.
  */
 
-class MockPdModel extends Model {
+class MockPdModel extends Model
+{
 
     protected int $mode = self::PROTECTDATA;
 
@@ -27,8 +30,8 @@ class MockPdModel extends Model {
         "answer" => 42
     ];
 
-    public function mockSetRaw($name, $value) {
+    public function mockSetRaw($name, $value)
+    {
         return $this->setRaw($name, $value);
     }
-
 }

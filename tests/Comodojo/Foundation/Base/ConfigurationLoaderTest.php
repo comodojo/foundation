@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Tests\Base;
+<?php declare(strict_types=1);
+
+namespace Comodojo\Foundation\Tests\Base;
 
 use \Comodojo\Foundation\Base\ConfigurationLoader;
 use \PHPUnit\Framework\TestCase;
@@ -27,5 +29,4 @@ class ConfigurationLoaderTest extends TestCase
     {
         $this->assertEquals(300, $this->config->get("routing-table-ttl"));
     }
-
 }

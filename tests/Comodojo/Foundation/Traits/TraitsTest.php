@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Foundation\Tests\Traits;
+<?php declare(strict_types=1);
+
+namespace Comodojo\Foundation\Tests\Traits;
 
 use \Comodojo\Foundation\Tests\Mock\TraitsContainer;
 use \Comodojo\Foundation\Base\Configuration;
@@ -6,21 +8,23 @@ use \Comodojo\Foundation\Logging\Manager as LogManager;
 use \Comodojo\Foundation\Events\Manager as EventsManager;
 use \PHPUnit\Framework\TestCase;
 
-class TraitsTest extends TestCase {
+class TraitsTest extends TestCase
+{
 
     protected static $config;
     protected static $logger;
     protected static $events;
 
-    public static function setupBeforeClass(): void {
+    public static function setupBeforeClass(): void
+    {
 
         self::$config = new Configuration([]);
         self::$logger = new LogManager('test');
         self::$events = new EventsManager(self::$logger->getLogger());
-
     }
 
-    public function testTraits() {
+    public function testTraits()
+    {
 
         $container = new TraitsContainer;
 
@@ -41,7 +45,5 @@ class TraitsTest extends TestCase {
         $this->assertInstanceOf('\Psr\Log\LoggerInterface', $result);
         $result = $container->getEvents();
         $this->assertInstanceOf('\Comodojo\Foundation\Events\Manager', $result);
-
     }
-
 }

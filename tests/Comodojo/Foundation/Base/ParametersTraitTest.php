@@ -1,4 +1,6 @@
-<?php namespace Comodojo\Dispatcher\Tests\Components;
+<?php declare(strict_types=1);
+
+namespace Comodojo\Dispatcher\Tests\Components;
 
 use \Comodojo\Foundation\Base\ParametersTrait;
 use \PHPUnit\Framework\TestCase;
@@ -16,7 +18,6 @@ class ParametersTraitTest extends TestCase
     {
 
         $this->set($this->param, $this->value);
-
     }
 
     public function testParameters()
@@ -43,7 +44,5 @@ class ParametersTraitTest extends TestCase
         $params = $this->get();
 
         $this->assertEquals(0, count($params));
-
     }
-
 }
